@@ -5,8 +5,6 @@ import fetch from 'node-fetch';
 
 import { schedule } from './fixtures';
 
-admin.initializeApp();
-
 export const exploreGithub = functions.pubsub
     .schedule(schedule)
     .onRun(async context => {
