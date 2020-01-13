@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 import cheerio from 'cheerio';
 import fetch from 'node-fetch';
 
-import { schedule } from './config';
+import { schedule } from './fixtures';
 
 admin.initializeApp();
 
@@ -35,8 +35,18 @@ export const exploreGithub = functions.pubsub
             ).then(res => res.json());
 
             plugins.push({
-                name: repository.split('/')[1],
+                name: repository.substr(1),
                 commands: commandsJson,
             });
         });
+
+        pushToFirestore(plugins);
     });
+
+function pushToFirestore(plugins: { name: string; commands: any }[]) {
+    const db = admin.firestore().collection('third-party-plugins');
+
+    plugins.forEach(p => {
+        db.doc(p.name).set(p.commands);
+    });
+}
