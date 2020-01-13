@@ -10,7 +10,7 @@ admin.initializeApp();
 export const exploreGithub = functions.pubsub
     .schedule(schedule)
     .onRun(async context => {
-        console.info(new Date());
+        console.info(context.timestamp);
 
         const html = await fetch(
             'https://github.com/topics/vocality'
