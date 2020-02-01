@@ -14,7 +14,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "firebase-admin": "^8.6.0",
+    "firebase-admin": "^8.9.2",
     "firebase-functions": "^3.3.0",
     "node-fetch": "^2.6.0"
   },
